@@ -2,6 +2,7 @@ import React from "react";
 import { Button, Modal, Form, Input, Select,Checkbox } from "antd";
 import DataContainer from "./container";
 import { Subscribe } from "unstated";
+import DataTable from './table.js';
 
 
 class PostDataComponent extends React.Component {
@@ -100,6 +101,7 @@ const AddData = () => {
       <Subscribe to={[DataContainer]}>
         {dataContainer => <PostDataComponent dataContainer={dataContainer} />}
       </Subscribe>
+      <DataTable />
     </div>
   );
 };
