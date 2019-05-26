@@ -1,9 +1,8 @@
 import React from "react";
-import { Button, Modal, Form, Input, Select,Checkbox } from "antd";
+import { Button, Modal, Form, Input, Select, Checkbox } from "antd";
 import DataContainer from "./container";
 import { Subscribe } from "unstated";
-import DataTable from './table.js';
-
+import DataTable from "./table.js";
 
 class PostDataComponent extends React.Component {
   render() {
@@ -11,10 +10,9 @@ class PostDataComponent extends React.Component {
       labelCol: { span: 1 },
       wrapperCol: { span: 25 }
     };
-    
 
     const { dataContainer } = this.props;
-    
+
     const Option = Select.Option;
     return (
       <div>
@@ -38,7 +36,7 @@ class PostDataComponent extends React.Component {
             layout="vertical"
             onSubmit={dataContainer.submitHandler}
           >
-            <Form.Item {...formItemLayout}  >
+            <Form.Item {...formItemLayout}>
               <Input
                 type="text"
                 name="word"
@@ -48,7 +46,7 @@ class PostDataComponent extends React.Component {
               />
             </Form.Item>
 
-            <Form.Item {...formItemLayout} >
+            <Form.Item {...formItemLayout}>
               <Input
                 type="text"
                 name="theme"
@@ -59,7 +57,6 @@ class PostDataComponent extends React.Component {
             </Form.Item>
             <Form.Item {...formItemLayout}>
               <Input
-
                 type="text"
                 name="example"
                 value={dataContainer.state.example}
@@ -71,7 +68,7 @@ class PostDataComponent extends React.Component {
             <Form.Item {...formItemLayout}>
               <Select
                 // name="level"
-                defaultValue='A1'
+                defaultValue="A1"
                 value={dataContainer.state.level}
                 onChange={dataContainer.levelChangeHandler}
               >
@@ -93,7 +90,6 @@ class PostDataComponent extends React.Component {
   }
 }
 // const WrappedNormalLoginForm = Form.create({ name: 'normal_logins' })(PostDataComponent);
-
 
 const AddData = () => {
   return (

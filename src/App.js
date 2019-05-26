@@ -9,9 +9,9 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <DenseAppBar />
-        <div style={{ padding: "50px 10px", width: "800px", margin: "auto" }}>
-          <Router>
+        <Router>
+          <DenseAppBar />
+          <div style={{ padding: "50px 10px", width: "800px", margin: "auto" }}>
             <div>
               <Switch>
                 <Route exact path="/" component={Tab} />
@@ -20,8 +20,8 @@ class App extends React.Component {
                 </Provider>
               </Switch>
             </div>
-          </Router>
-        </div>
+          </div>
+        </Router>
       </div>
     );
   }

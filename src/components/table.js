@@ -22,7 +22,7 @@ class DataTableComponent extends React.Component {
           title: "Action",
           dataIndex: "operation1",
           render: (text,record) =>
-              <a  onClick={() => dataContainer1.editBook(record.id,record.word, record.theme,record.example,record.level)} href="#">Edit</a>
+              <a  onClick={() => dataContainer1.editBook(record.id,record.word, record.theme,record.example,record.level)} href="javascript:void(0)">Edit</a>
         },
         {
           title: "Action",
@@ -35,7 +35,7 @@ class DataTableComponent extends React.Component {
               icon={<Icon type="question-circle-o" style={{ color: 'red' }} />}
               onConfirm={() => dataContainer1.onClickDelete(record.id)}
             >
-              <a href="#">Delete</a>
+              <a href="javascript:void(0)">Delete</a>
             </Popconfirm>
           )
         }
