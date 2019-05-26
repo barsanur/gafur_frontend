@@ -1,0 +1,179 @@
+import React from "react";
+import { Modal, Button, Form, Input, Checkbox, Select } from "antd";
+
+class ViewComponent extends React.Component {
+  state = {
+    loading: false,
+    visible: false,
+    queryData: {
+      id:  null,
+      word: "",
+      theme: "",
+      example: "",
+      level: "a1",
+      isNoun: true
+    }
+  };
+
+  showModal = () => {
+    this.setState({
+      visible: true
+    });
+  };
+
+  handleOk = async e => {
+    console.log(this.state);
+    console.log(this.props);
+    var data;
+    
+    this.props.form.validateFieldsAndScroll(async (err, values) => {
+      console.log(err);
+      if (!err) {
+        this.setState({ loading: true });
+
+        console.log("Received values of form: ", values);
+        const settings = {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(values)
+        };
+    
+        try {
+          await fetch("http://localhost:5000/questions", settings);
+          this.props.form.resetFields();
+          this.setState({ visible: false });
+        } catch (Exception) {
+          console.log("error while submitting", Exception);
+        }
+        this.setState({ loading: false });
+      }
+    });
+    console.log('set false loading ');
+    
+
+    
+  };
+
+  handleCancel = () => {
+    this.setState({ visible: false });
+  };
+
+  handleSelectChange = level => {
+    console.log(this.props.form);
+    console.log(this.state.queryData);
+
+    // this.props.form.setFieldsValue({level: value});
+    // this.setState({queryData:{level}});
+  };
+
+  render() {
+    const { visible, loading } = this.state;
+    const { getFieldDecorator } = this.props.form;
+    const Option = Select.Option;
+
+    return (
+      <div>
+        <Button type="primary" onClick={this.showModal}>
+          Add data
+        </Button>
+        <Modal
+          visible={visible}
+          title="Add data"
+          onOk={this.handleOk}
+          onCancel={this.handleCancel}
+          footer={[
+            <Button key="back" onClick={this.handleCancel}>
+              Return
+            </Button>,
+            <Button
+              key="submit"
+              type="primary"
+              loading={loading}
+              onClick={this.handleOk}
+            >
+              Submit
+            </Button>
+          ]}
+        >
+          <Form onSubmit={this.handleSubmit} className="login-form">
+            <Form.Item>
+              {getFieldDecorator("word", {
+                initialValue: this.state.queryData.word,
+                rules: [
+                  {
+                    required: true,
+                    message: "Please input your word!",
+                    whitespace: true
+                  }
+                ]
+              })(<Input placeholder="Word" />)}
+            </Form.Item>
+
+            <Form.Item>
+              {getFieldDecorator("theme", {
+                initialValue: this.state.queryData.theme,
+                rules: [
+                  {
+                    required: true,
+                    message: "Please input your theme!",
+                    whitespace: true
+                  }
+                ]
+              })(<Input placeholder="Theme" />)}
+            </Form.Item>
+
+            <Form.Item>
+              {getFieldDecorator("example", {
+                initialValue: this.state.queryData.example,
+                rules: [
+                  {
+                    required: true,
+                    message: "Please input your example!",
+                    whitespace: true
+                  }
+                ]
+              })(<Input placeholder="Example" />)}
+            </Form.Item>
+
+            <Form.Item>
+              {getFieldDecorator("level", {
+                initialValue: this.state.queryData.level,
+                rules: [
+                  { required: true, message: "Please select your level!" }
+                ]
+              })(
+                <Select
+                  placeholder="Select a option and change input text above"
+                  onChange={this.handleSelectChange}
+                >
+                  <Option value="a1">A1</Option>
+                  <Option value="a2">A2</Option>
+                  <Option value="b1">B1</Option>
+                  <Option value="b2">B2</Option>
+                  <Option value="c1">C1</Option>
+                  <Option value="c2">C2</Option>
+                </Select>
+              )}
+            </Form.Item>
+
+            <Form.Item>
+              {getFieldDecorator("isNoun", {
+                valuePropName: "checked",
+                initialValue: this.state.queryData.isNoun
+              })(<Checkbox>Is noun</Checkbox>)}
+            </Form.Item>
+          </Form>
+        </Modal>
+      </div>
+    );
+  }
+}
+
+const WrappedNormalLoginForm = Form.create({ name: "normal_login" })(
+  ViewComponent
+);
+
+export default WrappedNormalLoginForm;

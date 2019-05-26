@@ -2,7 +2,7 @@ import React from "react";
 import { Provider } from "unstated";
 import Tab from "./components/tab";
 import DenseAppBar from "./components/DenseAppBar";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Add from "./components/add";
 
 class App extends React.Component {

@@ -137,6 +137,8 @@ class DataContainer extends Container {
   };
   levelChangeHandler = value => {
     this.setState({ level: value });
+    console.log(this.state.level);
+    
   };
 
   getColumnSearchProps = dataIndex => ({

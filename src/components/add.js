@@ -3,9 +3,12 @@ import { Button, Modal, Form, Input, Select, Checkbox } from "antd";
 import DataContainer from "./container";
 import { Subscribe } from "unstated";
 import DataTable from "./table.js";
+import ViewComponent from "./view";
 
 class PostDataComponent extends React.Component {
   render() {
+    const Option = Select.Option;
+    
     const formItemLayout = {
       labelCol: { span: 1 },
       wrapperCol: { span: 25 }
@@ -13,7 +16,6 @@ class PostDataComponent extends React.Component {
 
     const { dataContainer } = this.props;
 
-    const Option = Select.Option;
     return (
       <div>
         <Button type="primary" onClick={() => dataContainer.showModal()}>
@@ -94,6 +96,7 @@ class PostDataComponent extends React.Component {
 const AddData = () => {
   return (
     <div>
+      <ViewComponent/>
       <Subscribe to={[DataContainer]}>
         {dataContainer => <PostDataComponent dataContainer={dataContainer} />}
       </Subscribe>
