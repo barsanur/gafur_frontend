@@ -1,5 +1,5 @@
 import React from "react";
-import { Modal, Button, Form, Input, Checkbox, Select } from "antd";
+import { Modal, Button, Form, Input, Checkbox, Select, message } from "antd";
 import { Route, Redirect } from "react-router-dom";
 
 class ViewComponent extends React.Component {
@@ -68,6 +68,7 @@ class ViewComponent extends React.Component {
           await fetch(url, settings);
           this.props.form.resetFields();
           this.setState({ visible: false });
+          message.success("Saved");
         } catch (Exception) {
           console.log("error while submitting", Exception);
         }
@@ -101,6 +102,7 @@ class ViewComponent extends React.Component {
       <div>
         <Modal
           visible={visible}
+          centered
           title="Add data"
           onOk={this.handleOk}
           onCancel={this.handleCancel}

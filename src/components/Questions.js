@@ -1,5 +1,5 @@
 import React from "react";
-import { Table, Input, Button, Icon, Form, Divider } from "antd";
+import { Table, Input, Button, Icon, Form, Divider, Popconfirm, message } from "antd";
 import Highlighter from "react-highlight-words";
 import { Link } from "react-router-dom";
 import { Route, Redirect } from "react-router-dom";
@@ -46,6 +46,15 @@ class Questions extends React.Component {
     const response = await fetch(url);
     const data = await response.json();
     this.setState({ data: data });
+  };
+  deleteData = async id => {
+    const sett = {
+      method: "delete"
+    };
+    await fetch("http://localhost:5000/questions/" + id, sett);
+
+    this.setState(this.loadData());
+    message.success("Was deleted");
   };
 
   componentDidMount() {
@@ -179,9 +188,14 @@ class Questions extends React.Component {
         title: "",
         key: "action",
         render: (text, record) => (
-          <span>
-            <a href="javascript:;">Delete</a>
-          </span>
+          <Popconfirm
+          
+            title="Sure to delete?"
+            icon={<Icon type="question-circle-o" style={{ color: 'red' }} />}
+            onConfirm={() => this.deleteData(record.id)}
+          >
+            <a href="javascript:void(0)">Delete</a>
+          </Popconfirm>
         )
       }
     ];
