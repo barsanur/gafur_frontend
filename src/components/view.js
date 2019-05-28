@@ -1,12 +1,13 @@
 import React from "react";
 import { Modal, Button, Form, Input, Checkbox, Select } from "antd";
+import { Route, Redirect } from 'react-router-dom'
 
 class ViewComponent extends React.Component {
   state = {
     loading: false,
-    visible: false,
+    visible: true,
     queryData: {
-      id:  null,
+      id: null,
       word: "",
       theme: "",
       example: "",
@@ -14,6 +15,21 @@ class ViewComponent extends React.Component {
       isNoun: true
     }
   };
+
+  componentDidMount() {
+    console.log(this.props);
+    this.showModal();
+    
+    // const {
+    //   match: { params }
+    // } = this.props;
+
+    // axios.get(`/api/users/${params.userId}`).then(({ data: user }) => {
+    //   console.log("user", user);
+
+    //   this.setState({ user });
+    // });
+  }
 
   showModal = () => {
     this.setState({
@@ -25,7 +41,7 @@ class ViewComponent extends React.Component {
     console.log(this.state);
     console.log(this.props);
     var data;
-    
+
     this.props.form.validateFieldsAndScroll(async (err, values) => {
       console.log(err);
       if (!err) {
@@ -40,7 +56,7 @@ class ViewComponent extends React.Component {
           },
           body: JSON.stringify(values)
         };
-    
+
         try {
           await fetch("http://localhost:5000/questions", settings);
           this.props.form.resetFields();
@@ -51,10 +67,7 @@ class ViewComponent extends React.Component {
         this.setState({ loading: false });
       }
     });
-    console.log('set false loading ');
-    
-
-    
+    console.log("set false loading ");
   };
 
   handleCancel = () => {
@@ -74,11 +87,15 @@ class ViewComponent extends React.Component {
     const { getFieldDecorator } = this.props.form;
     const Option = Select.Option;
 
+    if (this.state.visible === false) {
+      return <Redirect to='/table' />
+    }
+
     return (
       <div>
-        <Button type="primary" onClick={this.showModal}>
+        {/* <Button type="primary" onClick={this.showModal}>
           Add data
-        </Button>
+        </Button> */}
         <Modal
           visible={visible}
           title="Add data"

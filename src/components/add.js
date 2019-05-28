@@ -97,6 +97,7 @@ const AddData = () => {
   return (
     <div>
       <ViewComponent/>
+      
       <Subscribe to={[DataContainer]}>
         {dataContainer => <PostDataComponent dataContainer={dataContainer} />}
       </Subscribe>

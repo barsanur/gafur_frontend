@@ -2,7 +2,7 @@ import React from "react";
 import { Modal, Form, Input, Select, Popconfirm,Table , Icon} from "antd";
 import dataContainer1 from "./container";
 import { Subscribe } from "unstated";
-
+import { Link } from "react-router-dom";
 
 
 
@@ -49,6 +49,8 @@ class DataTableComponent extends React.Component {
     const Option = Select.Option;
     return (
       <div>
+        <Link to="/table/add">Add data</Link>
+  
         <Table
           columns={columns(dataContainer1)}
           dataSource={dataContainer1.state.questions}

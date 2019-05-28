@@ -4,6 +4,8 @@ import Tab from "./components/tab";
 import DenseAppBar from "./components/DenseAppBar";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Add from "./components/add";
+import ViewComponent from "./components/view";
+import DataTable from "./components/table.js";
 
 class App extends React.Component {
   render() {
@@ -15,8 +17,11 @@ class App extends React.Component {
             <div>
               <Switch>
                 <Route exact path="/" component={Tab} />
+                <Route path="/add/:id?" component={ViewComponent} />
+                {/* <Route exact path="/table" component={DataTable} /> */}
                 <Provider>
-                  <Route path="/add" component={Add} />
+                  <Route path="/table" component={DataTable} />
+                  <Route path="/table/add" component={ViewComponent} />
                 </Provider>
               </Switch>
             </div>
