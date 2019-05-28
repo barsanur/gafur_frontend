@@ -16,32 +16,22 @@ class ViewComponent extends React.Component {
     }
   };
 
+  getData = async id => {
+    const url = "http://localhost:5000/questions/" + id;
+    const response = await fetch(url);
+    const data = await response.json();
+    this.setState({ queryData: data });
+  };
+
   componentDidMount() {
-    console.log("View componentDidMount");
-    console.log(this.props.match.params);
-    if(this.props.match.params.id != undefined){
-      console.log('get view data');
-      
+    const { id } = this.props.match.params;
+    if (id != undefined && id > 0) {
+      this.getData(id);
     }
-    // console.log(this.props);
-    this.showModal();
-
-    // const {
-    //   match: { params }
-    // } = this.props;
-
-    // axios.get(`/api/users/${params.userId}`).then(({ data: user }) => {
-    //   console.log("user", user);
-
-    //   this.setState({ user });
-    // });
-  }
-
-  showModal = () => {
     this.setState({
       visible: true
     });
-  };
+  }
 
   handleOk = async e => {
     console.log(this.state);
@@ -79,34 +69,31 @@ class ViewComponent extends React.Component {
   handleCancel = () => {
     this.setState({ visible: false });
   };
+  
+  afterClose = () => {
+    let { history } = this.props;
+    history.push({
+      pathname: "/table/reload/"
+    });
+  };
 
   handleSelectChange = level => {
-    console.log(this.props.form);
-    console.log(this.state.queryData);
-
-    // this.props.form.setFieldsValue({level: value});
-    // this.setState({queryData:{level}});
+    console.log('-----handleSelectChange');
   };
 
   render() {
     const { visible, loading } = this.state;
     const { getFieldDecorator } = this.props.form;
     const Option = Select.Option;
-
-    if (this.state.visible === false) {
-      return <Redirect to="/table/reload" />;
-    }
-
+    
     return (
       <div>
-        {/* <Button type="primary" onClick={this.showModal}>
-          Add data
-        </Button> */}
         <Modal
           visible={visible}
           title="Add data"
           onOk={this.handleOk}
           onCancel={this.handleCancel}
+          afterClose={this.afterClose}
           footer={[
             <Button key="back" onClick={this.handleCancel}>
               Return
@@ -195,7 +182,7 @@ class ViewComponent extends React.Component {
   }
 }
 
-const WrappedNormalLoginForm = Form.create({ name: "normal_login" })(
+const WrappedNormalLoginForm = Form.create({ name: "view" })(
   ViewComponent
 );
 

@@ -37,12 +37,25 @@ const data = [
 
 class Questions extends React.Component {
   state = {
-    searchText: ""
+    searchText: "",
+    data:[]
   };
+
+  loadData = async () => {
+    const url = "http://localhost:5000/questions";
+    const response = await fetch(url);
+    const data = await response.json();
+    this.setState({ data: data });
+  };
+
+  componentDidMount() {
+    this.loadData();
+  }
 
   componentWillReceiveProps(nextProps) {
     console.log(this.props.match.params);
     console.log("Table reload");
+    this.loadData();
     // if(this.props.match.params.reload === 'reload'){
     // }
   }
@@ -137,7 +150,7 @@ class Questions extends React.Component {
         ...this.getColumnSearchProps("word"),
         render: (text, row, index) => {
           return (
-            <a href="javascript:;" onClick={() => this.navigateToView(row.key)}>
+            <a href="javascript:;" onClick={() => this.navigateToView(row.id)}>
               {text}
             </a>
           );
@@ -176,13 +189,13 @@ class Questions extends React.Component {
     ];
     return (
       <div>
-        <Link to="/table/add">Add data</Link>
-        <Table columns={columns} dataSource={data} bordered />;
+        <Link to="/table/view">Add data</Link>
+        <Table columns={columns} dataSource={this.state.data} bordered rowKey="id" />;
       </div>
     );
   }
 }
 
-const WrappedNormalLoginForm = Form.create({ name: "normal_login" })(Questions);
+const WrappedNormalLoginForm = Form.create({ name: "question" })(Questions);
 
 export default WrappedNormalLoginForm;
