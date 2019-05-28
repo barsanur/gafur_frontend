@@ -1,6 +1,6 @@
 import React from "react";
 import { Modal, Button, Form, Input, Checkbox, Select } from "antd";
-import { Route, Redirect } from 'react-router-dom'
+import { Route, Redirect } from "react-router-dom";
 
 class ViewComponent extends React.Component {
   state = {
@@ -17,9 +17,15 @@ class ViewComponent extends React.Component {
   };
 
   componentDidMount() {
-    console.log(this.props);
+    console.log("View componentDidMount");
+    console.log(this.props.match.params);
+    if(this.props.match.params.id != undefined){
+      console.log('get view data');
+      
+    }
+    // console.log(this.props);
     this.showModal();
-    
+
     // const {
     //   match: { params }
     // } = this.props;
@@ -88,7 +94,7 @@ class ViewComponent extends React.Component {
     const Option = Select.Option;
 
     if (this.state.visible === false) {
-      return <Redirect to='/table' />
+      return <Redirect to="/table/reload" />;
     }
 
     return (

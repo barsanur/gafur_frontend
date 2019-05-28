@@ -5,7 +5,7 @@ import DenseAppBar from "./components/DenseAppBar";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Add from "./components/add";
 import ViewComponent from "./components/view";
-import DataTable from "./components/table.js";
+import Questions from "./components/Questions.js";
 
 class App extends React.Component {
   render() {
@@ -20,8 +20,8 @@ class App extends React.Component {
                 <Route path="/add/:id?" component={ViewComponent} />
                 {/* <Route exact path="/table" component={DataTable} /> */}
                 <Provider>
-                  <Route path="/table" component={DataTable} />
-                  <Route path="/table/add" component={ViewComponent} />
+                  <Route path="/table/:reload?" component={Questions} />
+                  <Route path="/table/view/:id?" component={ViewComponent} />
                 </Provider>
               </Switch>
             </div>
