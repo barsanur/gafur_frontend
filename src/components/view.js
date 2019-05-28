@@ -7,7 +7,7 @@ class ViewComponent extends React.Component {
     loading: false,
     visible: true,
     queryData: {
-      id: null,
+      // id: null,
       word: "",
       theme: "",
       example: "",
@@ -43,8 +43,11 @@ class ViewComponent extends React.Component {
       if (!err) {
         this.setState({ loading: true });
 
-        console.log("Received values of form: ", values);
-        const settings = {
+
+        console.log("Received values of form: ", values,this.state.queryData);
+
+        let url = "http://localhost:5000/questions";
+        let settings = {
           method: "POST",
           headers: {
             Accept: "application/json",
@@ -53,8 +56,16 @@ class ViewComponent extends React.Component {
           body: JSON.stringify(values)
         };
 
+        if(this.state.queryData.id !=undefined){
+          url = url + "/" + this.state.queryData.id;
+          settings.method = "PUT";
+        }
+
+        console.log(url, settings);
+        
+
         try {
-          await fetch("http://localhost:5000/questions", settings);
+          await fetch(url, settings);
           this.props.form.resetFields();
           this.setState({ visible: false });
         } catch (Exception) {
