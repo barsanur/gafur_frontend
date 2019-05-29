@@ -1,5 +1,5 @@
 import React from "react";
-import { Modal, Form, Input, Select, Popconfirm,Table , Icon} from "antd";
+import { Modal, Form, Input, Select, Popconfirm,Table , Icon, Button} from "antd";
 import dataContainer1 from "./container";
 import { Subscribe } from "unstated";
 import { Link } from "react-router-dom";
@@ -50,6 +50,7 @@ class DataTableComponent extends React.Component {
     return (
       <div>
         <Link to="/table/add">Add data</Link>
+        
   
         <Table
           columns={columns(dataContainer1)}

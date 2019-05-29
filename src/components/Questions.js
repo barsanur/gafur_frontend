@@ -140,14 +140,12 @@ class Questions extends React.Component {
     this.setState({ searchText: "" });
   };
 
-  navigateToView = val => {
-    console.log("navigateToView", val);
-    // return <Redirect to="/table/add" />;
-    let { history } = this.props;
-    history.push({
-      pathname: "/table/view/"+val
-    });
-  };
+  redirectToTarget = (target, prop = null) => {
+    if(prop){
+      target = target + '/' + prop;
+    }
+    this.props.history.push(target);
+  }
 
   render() {
     const columns = [
@@ -159,7 +157,7 @@ class Questions extends React.Component {
         ...this.getColumnSearchProps("word"),
         render: (text, row, index) => {
           return (
-            <a href="javascript:;" onClick={() => this.navigateToView(row.id)}>
+            <a href="javascript:;" onClick={() => this.redirectToTarget('/table/view',row.id)}>
               {text}
             </a>
           );
@@ -201,7 +199,7 @@ class Questions extends React.Component {
     ];
     return (
       <div>
-        <Link to="/table/view">Add data</Link>
+        <Button type="primary" size="small" onClick={()=>this.redirectToTarget('/table/view')} style={{marginBottom:'10px'}}>Add data</Button>
         <Table columns={columns} dataSource={this.state.data} bordered rowKey="id" />;
       </div>
     );
