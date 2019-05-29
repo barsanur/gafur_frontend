@@ -1,6 +1,5 @@
 import React from "react";
 import { Modal, Button, Form, Input, Checkbox, Select, message } from "antd";
-import { Route, Redirect } from "react-router-dom";
 
 class ViewComponent extends React.Component {
   state = {
@@ -25,7 +24,7 @@ class ViewComponent extends React.Component {
 
   componentDidMount() {
     const { id } = this.props.match.params;
-    if (id != undefined && id > 0) {
+    if (id && id > 0) {
       this.getData(id);
     }
     this.setState({
@@ -34,10 +33,6 @@ class ViewComponent extends React.Component {
   }
 
   handleOk = async e => {
-    console.log(this.state);
-    console.log(this.props);
-    var data;
-
     this.props.form.validateFieldsAndScroll(async (err, values) => {
       console.log(err);
       if (!err) {
@@ -56,7 +51,7 @@ class ViewComponent extends React.Component {
           body: JSON.stringify(values)
         };
 
-        if(this.state.queryData.id !=undefined){
+        if(this.state.queryData.id){
           url = url + "/" + this.state.queryData.id;
           settings.method = "PUT";
         }

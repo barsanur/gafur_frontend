@@ -57,7 +57,7 @@ class Tab extends React.Component {
 
   render() {
     
-    const {activeKey, tabData, panes} = this.state; 
+    const {tabData} = this.state; 
 
     return (
       <div>

@@ -1,39 +1,6 @@
 import React from "react";
-import { Table, Input, Button, Icon, Form, Divider, Popconfirm, message } from "antd";
+import { Table, Input, Button, Icon, Form, Popconfirm, message } from "antd";
 import Highlighter from "react-highlight-words";
-import { Link } from "react-router-dom";
-import { Route, Redirect } from "react-router-dom";
-
-const data = [
-  {
-    key: "1",
-    word: "John Brown",
-    theme: 32,
-    example: "New York No. 1 Lake Park",
-    level: 434
-  },
-  {
-    key: "2",
-    word: "Joe Black",
-    theme: 42,
-    example: "London No. 1 Lake Park",
-    level: 0
-  },
-  {
-    key: "3",
-    word: "Jim Green",
-    theme: 32,
-    example: "Sidney No. 1 Lake Park",
-    level: 99
-  },
-  {
-    key: "4",
-    word: "Jim Red",
-    theme: 32,
-    example: "London No. 2 Lake Park",
-    level: 77
-  }
-];
 
 class Questions extends React.Component {
   state = {
@@ -157,7 +124,7 @@ class Questions extends React.Component {
         ...this.getColumnSearchProps("word"),
         render: (text, row, index) => {
           return (
-            <a href="javascript:;" onClick={() => this.redirectToTarget('/table/view',row.id)}>
+            <a href="#update" onClick={() => this.redirectToTarget('/table/view',row.id)}>
               {text}
             </a>
           );
@@ -192,7 +159,7 @@ class Questions extends React.Component {
             icon={<Icon type="question-circle-o" style={{ color: 'red' }} />}
             onConfirm={() => this.deleteData(record.id)}
           >
-            <a href="javascript:void(0)">Delete</a>
+            <a href="#delete">Delete</a>
           </Popconfirm>
         )
       }
