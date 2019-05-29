@@ -3,7 +3,6 @@ import { Provider } from "unstated";
 import Tab from "./components/tab";
 import DenseAppBar from "./components/DenseAppBar";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Add from "./components/add";
 import ViewComponent from "./components/view";
 import Questions from "./components/Questions.js";
 
