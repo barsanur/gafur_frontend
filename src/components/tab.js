@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Icon, PageHeader, Tag, Typography } from "antd";
+import { Button, PageHeader, Tag, Typography, Empty } from "antd";
 import "../static/Question.css";
 
 const { Paragraph } = Typography;
@@ -47,8 +47,12 @@ class Tab extends React.Component {
     );
     const data = await response.json();
     console.log(data);
-    data.sort(() => Math.random() - 0.5);
-    this.setState({ tabData: data });
+    if(!(data && data.status)){
+      data.sort(() => Math.random() - 0.5);
+      this.setState({ tabData: data });
+    }else{
+      this.setState({ tabData: [] });
+    }
   };
 
   createButton = () => {
@@ -111,6 +115,11 @@ class Tab extends React.Component {
             </PageHeader>
           </div>
         )}
+
+        {
+          tabData.length < 3 && 
+          <Empty />
+        }
 
         <Button
           style={{ margin: "10px 0" }}
