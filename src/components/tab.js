@@ -98,7 +98,7 @@ class Tab extends React.Component {
 
                   <p className="contentLink">
                     <a href="#test">
-                      <Icon type="pic-right" /> {tabData[2].theme}
+                      {tabData[2].theme}
                     </a>
                   </p>
                   <p>
