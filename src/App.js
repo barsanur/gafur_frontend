@@ -1,10 +1,10 @@
 import React from "react";
-import { Provider } from "unstated";
 import Tab from "./components/tab";
 import DenseAppBar from "./components/DenseAppBar";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import ViewComponent from "./components/view";
 import Questions from "./components/Questions.js";
+import Login from "./components/Login.js";
 
 class App extends React.Component {
   render() {
@@ -17,11 +17,9 @@ class App extends React.Component {
               <Switch>
                 <Route exact path="/" component={Tab} />
                 <Route path="/add/:id?" component={ViewComponent} />
-                {/* <Route exact path="/table" component={DataTable} /> */}
-                <Provider>
-                  <Route path="/table/:reload?" component={Questions} />
-                  <Route path="/table/view/:id?" component={ViewComponent} />
-                </Provider>
+                <Route path="/table/:reload?" component={Questions} />
+                <Route path="/table/view/:id?" component={ViewComponent} />
+                <Route exact path="/login" component={Login} />
               </Switch>
             </div>
           </div>

@@ -25,7 +25,16 @@ class Questions extends React.Component {
   };
 
   componentDidMount() {
-    this.loadData();
+    if(sessionStorage.getItem('_w')){
+      // var user = JSON.parse(sessionStorage.getItem('_w'));
+      this.loadData();
+      // if(user && user.username === 'test' && user.password === 'test'){
+      // } else{
+      //   this.props.history.push('/login');
+      // }
+    } else{
+      this.props.history.push('/login');
+    }
   }
 
   componentWillReceiveProps(nextProps) {
