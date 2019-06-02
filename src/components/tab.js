@@ -91,7 +91,7 @@ class Tab extends React.Component {
               tags={
                 tabData[0].isNoun === 1 && (
                   <Tag color="magenta">
-                    There is going to be some example here
+                    Wie heißt der Plural des Substantivs?
                   </Tag>
                 )
               }
