@@ -43,8 +43,8 @@ class Tab extends React.Component {
 
   getData = async () => {
     const response = await fetch(
-      // "http://159.89.1.89:5000/level/" + this.state.activeKey
-      "http://localhost:5000/level/" + this.state.activeKey
+      "http://159.89.1.89:5000/level/" + this.state.activeKey
+      // "http://localhost:5000/level/" + this.state.activeKey
     );
     const data = await response.json();
     console.log(data);
