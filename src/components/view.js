@@ -44,8 +44,8 @@ class ViewComponent extends React.Component {
 
         console.log("Received values of form: ", values,this.state.queryData);
 
-        // let url = "http://159.89.1.89:5000/questions";
-        let url = "http://localhost:5000/questions";
+        let url = "http://159.89.1.89:5000/questions";
+        // let url = "http://localhost:5000/questions ";
         let settings = {
           method: "POST",
           headers: {
