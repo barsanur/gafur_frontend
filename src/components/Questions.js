@@ -5,7 +5,7 @@ import Highlighter from "react-highlight-words";
 class Questions extends React.Component {
   state = {
     searchText: "",
-    data:[]
+    data: []
   };
 
   loadData = async () => {
@@ -27,15 +27,15 @@ class Questions extends React.Component {
   };
 
   componentDidMount() {
-    if(sessionStorage.getItem('_w')){
+    if (sessionStorage.getItem("_w")) {
       // var user = JSON.parse(sessionStorage.getItem('_w'));
       this.loadData();
       // if(user && user.username === 'test' && user.password === 'test'){
       // } else{
       //   this.props.history.push('/login');
       // }
-    } else{
-      this.props.history.push('/login');
+    } else {
+      this.props.history.push("/login");
     }
   }
 
@@ -119,11 +119,11 @@ class Questions extends React.Component {
   };
 
   redirectToTarget = (target, prop = null) => {
-    if(prop){
-      target = target + '/' + prop;
+    if (prop) {
+      target = target + "/" + prop;
     }
     this.props.history.push(target);
-  }
+  };
 
   render() {
     const columns = [
@@ -134,23 +134,26 @@ class Questions extends React.Component {
         ...this.getColumnSearchProps("word"),
         render: (text, row, index) => {
           return (
-            <a href="#update" onClick={() => this.redirectToTarget('/table/view',row.id)}>
+            <a
+              href="#update"
+              onClick={() => this.redirectToTarget("/table/view", row.id)}
+            >
               {text}
             </a>
           );
         }
       },
       {
-        title: "Theme",
-        dataIndex: "theme",
-        key: "theme",
-        ...this.getColumnSearchProps("theme")
-      },
-      {
         title: "Example",
         dataIndex: "example",
         key: "example",
         ...this.getColumnSearchProps("example")
+      },
+      {
+        title: "Grammar",
+        dataIndex: "theme",
+        key: "theme",
+        ...this.getColumnSearchProps("theme")
       },
       {
         title: "Level",
@@ -165,20 +168,35 @@ class Questions extends React.Component {
         width: "50px",
         render: (text, record) => (
           <Popconfirm
-          
             title="Sure to delete?"
-            icon={<Icon type="question-circle-o" style={{ color: 'red' }} />}
+            icon={<Icon type="question-circle-o" style={{ color: "red" }} />}
             onConfirm={() => this.deleteData(record.id)}
           >
-            <a href="#delete"><Icon type="delete" /></a>
+            <a href="#delete">
+              <Icon type="delete" />
+            </a>
           </Popconfirm>
         )
       }
     ];
     return (
       <div>
-        <Button type="primary" size="small" onClick={()=>this.redirectToTarget('/table/view')} style={{marginBottom:'10px'}}>Add data</Button>
-        <Table columns={columns} dataSource={this.state.data} scroll={{ x: 600 }} bordered rowKey="id" />;
+        <Button
+          type="primary"
+          size="small"
+          onClick={() => this.redirectToTarget("/table/view")}
+          style={{ marginBottom: "10px" }}
+        >
+          Add data
+        </Button>
+        <Table
+          columns={columns}
+          dataSource={this.state.data}
+          scroll={{ x: 600 }}
+          bordered
+          rowKey="id"
+        />
+        ;
       </div>
     );
   }
