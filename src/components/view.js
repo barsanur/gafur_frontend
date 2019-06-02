@@ -24,25 +24,28 @@ class ViewComponent extends React.Component {
   };
 
   componentDidMount() {
-    console.log('--- componentDidMount  ----');
-    const { id } = this.props.match.params;
-    if (id && id > 0) {
-      this.getData(id);
+    // console.log("--- componentDidMount  ----");
+    if (sessionStorage.getItem("_w") === "Z2FmdXJnYWZ1ckdBRlVS") {
+      const { id } = this.props.match.params;
+      if (id && id > 0) {
+        this.getData(id);
+      }
+      this.setState({
+        visible: true
+      });
+    } else {
+      this.props.history.push("/login");
     }
-    this.setState({
-      visible: true
-    });
   }
 
   handleOk = async e => {
-    console.log('--- handleOk  ----');
+    // console.log("--- handleOk  ----");
     this.props.form.validateFieldsAndScroll(async (err, values) => {
-      console.log(err);
+      // console.log(err);
       if (!err) {
         this.setState({ loading: true });
 
-
-        console.log("Received values of form: ", values,this.state.queryData);
+        // console.log("Received values of form: ", values, this.state.queryData);
 
         let url = "http://159.89.1.89:5000/questions";
         // let url = "http://localhost:5000/questions ";
@@ -55,13 +58,12 @@ class ViewComponent extends React.Component {
           body: JSON.stringify(values)
         };
 
-        if(this.state.queryData.id){
+        if (this.state.queryData.id) {
           url = url + "/" + this.state.queryData.id;
           settings.method = "PUT";
         }
 
         console.log(url, settings);
-        
 
         try {
           await fetch(url, settings);
@@ -69,18 +71,18 @@ class ViewComponent extends React.Component {
           this.setState({ visible: false });
           message.success("Saved");
         } catch (Exception) {
-          console.log("error while submitting", Exception);
+          // console.log("error while submitting", Exception);
         }
         this.setState({ loading: false });
       }
     });
-    console.log("set false loading ");
+    // console.log("set false loading ");
   };
 
   handleCancel = () => {
     this.setState({ visible: false });
   };
-  
+
   afterClose = () => {
     let { history } = this.props;
     history.push({
@@ -89,14 +91,14 @@ class ViewComponent extends React.Component {
   };
 
   handleSelectChange = level => {
-    console.log('-----handleSelectChange');
+    // console.log("-----handleSelectChange");
   };
 
   render() {
     const { visible, loading } = this.state;
     const { getFieldDecorator } = this.props.form;
     const Option = Select.Option;
-    
+
     return (
       <div>
         <Modal
@@ -194,8 +196,6 @@ class ViewComponent extends React.Component {
   }
 }
 
-const WrappedNormalLoginForm = Form.create({ name: "view" })(
-  ViewComponent
-);
+const WrappedNormalLoginForm = Form.create({ name: "view" })(ViewComponent);
 
 export default WrappedNormalLoginForm;

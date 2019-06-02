@@ -28,7 +28,7 @@ class Tab extends React.Component {
   }
 
   onChange = activeKey => {
-    console.log(activeKey);
+    // console.log(activeKey);
     this.setState({ activeKey }, () => {
       this.getData();
     });
@@ -40,7 +40,7 @@ class Tab extends React.Component {
       // "http://localhost:5000/level/" + this.state.activeKey
     );
     const data = await response.json();
-    console.log(data);
+    // console.log(data);
     if (!(data && data.status)) {
       data.sort(() => Math.random() - 0.5);
       this.setState({ tabData: data });

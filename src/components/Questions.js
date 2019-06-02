@@ -27,21 +27,18 @@ class Questions extends React.Component {
   };
 
   componentDidMount() {
-    if (sessionStorage.getItem("_w")) {
-      // var user = JSON.parse(sessionStorage.getItem('_w'));
+    // console.log(sessionStorage.getItem("_w"));
+    
+    if (sessionStorage.getItem("_w") === "Z2FmdXJnYWZ1ckdBRlVS") {
       this.loadData();
-      // if(user && user.username === 'test' && user.password === 'test'){
-      // } else{
-      //   this.props.history.push('/login');
-      // }
     } else {
       this.props.history.push("/login");
     }
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log(this.props.match.params);
-    console.log("Table reload");
+    // console.log(this.props.match.params);
+    // console.log("Table reload");
     this.loadData();
     // if(this.props.match.params.reload === 'reload'){
     // }
