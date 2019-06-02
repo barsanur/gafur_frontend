@@ -18,11 +18,11 @@ class App extends React.Component {
               <Switch>
                 <Route exact path="/" component={Tab} />
                 <Route path="/add/:id?" component={ViewComponent} />
+                <Route exact path="/login" component={Login} />
                 <Provider>
                   <Route path="/table/:reload?" component={Questions} />
                   <Route path="/table/view/:id?" component={ViewComponent} />
                 </Provider>
-                <Route exact path="/login" component={Login} />
               </Switch>
             </div>
           </div>
