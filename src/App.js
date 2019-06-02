@@ -13,7 +13,7 @@ class App extends React.Component {
       <div>
         <Router>
           <DenseAppBar />
-          <div style={{ padding: "50px 10px", width: "800px", margin: "auto" }}>
+          <div style={{ padding: "50px 0px", width: "90%", margin: "auto" }}>
             <div>
               <Switch>
                 <Route exact path="/" component={Tab} />

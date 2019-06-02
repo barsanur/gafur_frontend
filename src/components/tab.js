@@ -5,13 +5,6 @@ import "../static/Question.css";
 const { Paragraph } = Typography;
 const ButtonGroup = Button.Group;
 
-const extraContent = (
-  <img
-    src="https://gw.alipayobjects.com/mdn/mpaas_user/afts/img/A*KsfVQbuLRlYAAAAAAAAAAABjAQAAAQ/original"
-    alt="content"
-  />
-);
-
 class Tab extends React.Component {
   constructor(props) {
     super(props);
@@ -48,10 +41,10 @@ class Tab extends React.Component {
     );
     const data = await response.json();
     console.log(data);
-    if(!(data && data.status)){
+    if (!(data && data.status)) {
       data.sort(() => Math.random() - 0.5);
       this.setState({ tabData: data });
-    }else{
+    } else {
       this.setState({ tabData: [] });
     }
   };
@@ -61,7 +54,7 @@ class Tab extends React.Component {
     for (let i = 0; i < this.state.panes.length; i++) {
       btn.push(
         <Button
-          style={{ width: "100px" }}
+          style={{ minWidth: "50px", maxWidth: "150px", width:"15vw" }}
           size="large"
           type={
             this.state.panes[i].key === this.state.activeKey ? "primary" : ""
@@ -102,25 +95,25 @@ class Tab extends React.Component {
                   <Paragraph>{tabData[1].example}</Paragraph>
 
                   <p className="contentLink">
-                    <a href="#test">
-                      {tabData[2].theme}
-                    </a>
+                    <a href="#test">{tabData[2].theme}</a>
                   </p>
                   <p>
                     Überlegen Sie Sich zu dieser Kombination einen Satz oder
                     eine Situation
                   </p>
                 </div>
-                <div className="extraContent">{extraContent}</div>
+                {/* <div className="extraContent">
+                  <img
+                    src="https://gw.alipayobjects.com/mdn/mpaas_user/afts/img/A*KsfVQbuLRlYAAAAAAAAAAABjAQAAAQ/original"
+                    alt="content"
+                  />
+                </div> */}
               </div>
             </PageHeader>
           </div>
         )}
 
-        {
-          tabData.length < 3 && 
-          <Empty />
-        }
+        {tabData.length < 3 && <Empty />}
 
         <Button
           style={{ margin: "10px 0" }}
