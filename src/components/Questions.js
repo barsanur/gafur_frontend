@@ -131,7 +131,6 @@ class Questions extends React.Component {
         title: "Word",
         dataIndex: "word",
         key: "word",
-        width: "30%",
         ...this.getColumnSearchProps("word"),
         render: (text, row, index) => {
           return (
@@ -145,7 +144,6 @@ class Questions extends React.Component {
         title: "Theme",
         dataIndex: "theme",
         key: "theme",
-        width: "20%",
         ...this.getColumnSearchProps("theme")
       },
       {
@@ -158,11 +156,13 @@ class Questions extends React.Component {
         title: "Level",
         dataIndex: "level",
         key: "level",
+        width: "50px",
         ...this.getColumnSearchProps("level")
       },
       {
         title: "",
         key: "action",
+        width: "50px",
         render: (text, record) => (
           <Popconfirm
           
@@ -170,7 +170,7 @@ class Questions extends React.Component {
             icon={<Icon type="question-circle-o" style={{ color: 'red' }} />}
             onConfirm={() => this.deleteData(record.id)}
           >
-            <a href="#delete">Delete</a>
+            <a href="#delete"><Icon type="delete" /></a>
           </Popconfirm>
         )
       }
@@ -178,7 +178,7 @@ class Questions extends React.Component {
     return (
       <div>
         <Button type="primary" size="small" onClick={()=>this.redirectToTarget('/table/view')} style={{marginBottom:'10px'}}>Add data</Button>
-        <Table columns={columns} dataSource={this.state.data} bordered rowKey="id" />;
+        <Table columns={columns} dataSource={this.state.data} scroll={{ x: 600 }} bordered rowKey="id" />;
       </div>
     );
   }
