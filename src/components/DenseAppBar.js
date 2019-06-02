@@ -26,7 +26,7 @@ function DenseAppBar() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" color="inherit">
-            <Link to="/">GermanFreak</Link>
+            <Link style={{color: 'white'}} to="/">GermanFreak</Link>
           </Typography>
         </Toolbar>
       </AppBar>
