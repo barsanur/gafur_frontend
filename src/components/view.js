@@ -16,6 +16,7 @@ class ViewComponent extends React.Component {
   };
 
   getData = async id => {
+    // const url = "http://159.89.1.89:5000/questions/" + id;
     const url = "http://localhost:5000/questions/" + id;
     const response = await fetch(url);
     const data = await response.json();
@@ -23,6 +24,7 @@ class ViewComponent extends React.Component {
   };
 
   componentDidMount() {
+    console.log('--- componentDidMount  ----');
     const { id } = this.props.match.params;
     if (id && id > 0) {
       this.getData(id);
@@ -33,6 +35,7 @@ class ViewComponent extends React.Component {
   }
 
   handleOk = async e => {
+    console.log('--- handleOk  ----');
     this.props.form.validateFieldsAndScroll(async (err, values) => {
       console.log(err);
       if (!err) {
@@ -41,6 +44,7 @@ class ViewComponent extends React.Component {
 
         console.log("Received values of form: ", values,this.state.queryData);
 
+        // let url = "http://159.89.1.89:5000/questions";
         let url = "http://localhost:5000/questions";
         let settings = {
           method: "POST",

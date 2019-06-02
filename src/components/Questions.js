@@ -9,6 +9,7 @@ class Questions extends React.Component {
   };
 
   loadData = async () => {
+    // const url = "http://159.89.1.89:5000/questions";
     const url = "http://localhost:5000/questions";
     const response = await fetch(url);
     const data = await response.json();
@@ -19,6 +20,7 @@ class Questions extends React.Component {
       method: "delete"
     };
     await fetch("http://localhost:5000/questions/" + id, sett);
+    // await fetch("http://159.89.1.89:5000/questions/" + id, sett);
 
     this.setState(this.loadData());
     message.success("Was deleted");
