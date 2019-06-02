@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import ViewComponent from "./components/view";
 import Questions from "./components/Questions.js";
 import Login from "./components/Login.js";
+import {Provider} from 'unstated';
 
 class App extends React.Component {
   render() {
@@ -17,8 +18,10 @@ class App extends React.Component {
               <Switch>
                 <Route exact path="/" component={Tab} />
                 <Route path="/add/:id?" component={ViewComponent} />
-                <Route path="/table/:reload?" component={Questions} />
-                <Route path="/table/view/:id?" component={ViewComponent} />
+                <Provider>
+                  <Route path="/table/:reload?" component={Questions} />
+                  <Route path="/table/view/:id?" component={ViewComponent} />
+                </Provider>
                 <Route exact path="/login" component={Login} />
               </Switch>
             </div>
